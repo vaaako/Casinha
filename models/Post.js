@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
 	comments:   { type: Array, default: [] }, // Post IDs
 	media:      { type: Object, default: undefined },
 	whoReacted: { type: Array, default: [] }, // { userid: id, reaction: "like" }
-	date:       { type: Date, default: Date.now() },
+	date:       { type: Date, default: () => Date.now() },
 });
 
 module.exports = mongoose.model("Post", postSchema);
