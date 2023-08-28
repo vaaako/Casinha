@@ -54,11 +54,11 @@ You can access it in your browser via the address http://localhost:port_you_chos
 # TO DO
 ## Future Features
 ### Priority order
-[ ] MP3 Support
-[ ] Notification
-[ ] DM
-[ ] Crop Image
+- [ ] MP3 Support
+- [ ] Notification
+- [ ] DM
+- [ ] Crop Image
 
 ## Bugs to fix
-[X] Time ago bug
-[ ] Wrap Characters
+- [X] Time ago bug
+- [ ] Wrap Characters
