@@ -7,9 +7,11 @@ const { storeMessage, getMessage } = require('./MessageTool');
 const postPage = async (req, res) => {
 	let user = req.user;
 	let post = await Post.findOne({ pubid: req.params.postid });
+	if(!post) return res.render('notfound', { user });
+
 	let formattedpost = await formattedPost([post], req.user.id);
 
-	let allComments = await gettAllComments(post, user.id, limit=2);
+	let allComments = await gettAllComments(post, user.id, limit=5);
 
 	return res.render('post', {
 		user,

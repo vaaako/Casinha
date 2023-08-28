@@ -8,9 +8,9 @@ const userPage = async (req, res) => {
 	let user = await User.findOne({ username: username })
 	let ownuser = req.user;
 
-	if(!user) return res.render('notfound', { user: req.user }); // User not found
+	if(!user) return res.render('notfound', { user: ownuser }); // User not found
 
-	let allPosts = await getAllPostsFromUser(user, ownuser.id, limit=3);
+	let allPosts = await getAllPostsFromUser(user, ownuser.id, limit=5);
 
 	return res.render('user', { allPosts, user, ownuser }); // user -> user's profile / ownuser -> user acessing profile
 };

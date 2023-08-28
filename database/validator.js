@@ -9,7 +9,7 @@ const MAX_BIO_LENGTH = 200;
 const isNicknameValid = (nickname) => nickname.length >= MIN_NAME_LENGTH && nickname.length <= MAX_NAME_LENGTH;
 const isUsernameValid = (username) => /^[A-Za-z0-9_]+$/g.test(username) && username.length >= MIN_NAME_LENGTH && username.length <= MAX_NAME_LENGTH;
 const isEmailValid    = (email) => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
-const isPasswordValid = (password, confirmpword) => password == confirmpword && password.length > 8;
+const isPasswordValid = (password, confirmpword) => password == confirmpword && password.length >= 8;
 const isBioValid = (bio) => bio.length >= MIN_BIO_LENGTH && bio.length <= MAX_BIO_LENGTH;
 
 
@@ -74,7 +74,9 @@ const getMediaExtension = (filename) => '.' + filename.split('.').pop()// Get la
 
 const validateMedia = (files, reqname) => {
 	if(files) {
-		let sampleFile     = files[reqname]
+		let sampleFile     = files[reqname];
+		if(!sampleFile) return undefined; // Don't have
+
 		let mediaExtension = getMediaExtension(sampleFile.name);
 
 		let isValid = isMediaValid(files, mediaExtension);
@@ -86,7 +88,7 @@ const validateMedia = (files, reqname) => {
 		}
 	}
 
-	return undefined;
+	return undefined; // Don't have
 }
 
 

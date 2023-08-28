@@ -6,22 +6,22 @@ const Post = require('../models/Post');
 
 const timeAgo = (timestamp) => {
 	// Math.floor(current_date - provided_time / 100) -> ellapsed time in seconds
-	let providedTime = new Date(timestamp);
-	const ellapsedTime = Math.floor((new Date() - providedTime) / 1000);
+	let providedTime = new Date(timestamp).getTime();
+	let ellapsedTime = Math.floor((new Date() - providedTime) / 1000);
 
 	if (ellapsedTime < 60) {
 		return ellapsedTime + " segs ago";
 
 	} else if (ellapsedTime < 60 * 60) { // Les than 1 hour
-		const minutes = Math.floor(ellapsedTime / 60);
+		let minutes = Math.floor(ellapsedTime / 60);
 		return `${minutes} ${(minutes === 1) ? 'min' : 'mins'} ago`;
 
 	} else if (ellapsedTime < 24 * 60 * 60) { // Less than 24 hours (1 day)
-		const hours = Math.floor(ellapsedTime / (60 * 60));
+		let hours = Math.floor(ellapsedTime / (60 * 60));
 		return `${hours} ${(hours === 1) ? 'hour' : 'hours'} ago`;
 
 	} else if (ellapsedTime < 7 * 24 * 60 * 60) { // Less than 7 days
-		const days = Math.floor(ellapsedTime / 86400);
+		let days = Math.floor(ellapsedTime / 86400);
 		return `${days} ${(days === 1) ? 'day' : 'days'} ago`;
 
 	} else {
@@ -132,6 +132,8 @@ async function formattedPost(posts, userid) {
 		// let author = authors.get(post.author);
 		let author = await User.findOne({ pubid: post.author }).select('nickname').select('username');
 		const reactions = post.whoReacted;
+
+		console.log(post.content)
 
 		// Calc like and dislike
 		const reactionCounts = reactions.reduce((acc, reaction) => {

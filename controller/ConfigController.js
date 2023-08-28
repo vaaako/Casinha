@@ -15,7 +15,6 @@ const updateProfile = async (req, res) => {
 		let { newnickname, newbio } = req.body;
 		let user = await User.findOne({ pubid: req.user.id });
 		let localuser = req.user;
-		console.log("\n\nBODY =>", req.body)
 
 		if(!newnickname && !newbio && !req.files) return res.redirect('/configs');
 

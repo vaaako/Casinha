@@ -25,11 +25,11 @@ const { isPostValid, validateMedia } = require('../database/validator');
 const homePage = async (req, res) => {
 	// Passport
 	// console.log("\n\nPASSPORT =>", req.session, req.sessionID)
-	console.log("USER =>", req.user);
+	// console.log("USER =>", req.user);
 	let user = req.user;
 
 	// Add likes and dislikes
-	const allPosts = await getAllPosts(user.id, limit=2);
+	const allPosts = await getAllPosts(user.id, limit=5);
 
 	return res.render('index', {
 		allPosts,
