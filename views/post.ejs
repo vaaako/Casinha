@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<%- include('partials/embed'); %>
+
 	<link rel="stylesheet" href="/styles/base.css">
 	<link rel="stylesheet" href="/styles/sidebar.css">
 	<link rel="stylesheet" href="/styles/loadmore.css">
@@ -27,7 +29,8 @@
 		<%- include('partials/message', { message }); %>
 		<form action="/comment/<%= post.pubid %>" enctype="multipart/form-data" id="postform" method="post">
 			<textarea id="postarea" oninput="autogrow(this);" name="post" maxlength="300" minlength="1" placeholder="Post"></textarea>
-			<input class="bi bi-plus-circle" type="file" name="postmedia" accept="image/* | video/*">
+			<!-- <input class="bi bi-plus-circle" type="file" name="postmedia" accept="image/* | video/*"> -->
+			<input type="file" name="postmedia" accept="image/* | video/*">
 
 			<button id="postbtn" class="submit-button" type="submit">Comment</button>
 		</form>

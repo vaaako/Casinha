@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<%- include('partials/embed'); %>
+
 	<link rel="stylesheet" href="/styles/base.css">
 	<link rel="stylesheet" href="/styles/sidebar.css">
 	<link rel="stylesheet" href="/styles/loadmore.css">
@@ -33,7 +35,7 @@
 	<header class="banner">
 		<div class="background"></div>
 		<div id="profile-area">
-			<img class="pfp-style" src="/medias/pfp/<%= user.pubid %>.png" onerror="this.onerror=null; this.src='/medias/pfp/defaultpfp.png';" alt="pfp">
+			<img class="pfp-style" src="/medias/pfp/<%= user.pubid %>.png" onerror="this.onerror=null; this.src='/medias/defaultpfp.png';" alt="pfp">
 			<p id="nickname"><%= user.nickname %> %></p>
 			<p id="username"><%= user.username %></p>
 			<p id="bio"><%= user.bio %></p>
