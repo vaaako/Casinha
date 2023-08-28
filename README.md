@@ -3,6 +3,8 @@
 This is developed using Node.js with
  the Express framework and MongoDB database
 
+Link: https://casinha.vaaako.repl.co
+
 ## Features
 - **Secure Authentication**
 - **Home Page with Posts**
@@ -47,3 +49,16 @@ npm run dev # run with daemon
 
 The project is now running locally.<br>
 You can access it in your browser via the address http://localhost:port_you_chose_on_env_file
+
+
+# TO DO
+## Future Features
+### Priority order
+[ ] MP3 Support
+[ ] Notification
+[ ] DM
+[ ] Crop Image
+
+## Bugs to fix
+[X] Time ago bug
+[ ] Wrap Characters
