@@ -11,6 +11,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 
+// Utilities
 const fileUpload = require('express-fileupload');
 
 // Other
@@ -69,6 +70,8 @@ app.use(fileUpload({
 	limits: { fileSize: 10 * 1024 * 1024 } // 10MB -> Mega, Kilobyte, Byte
 }));
 
+/* Favicon */
+app.use('/favicon.ico', express.static('public/medias/favicon.ico'));
 
 /* Upload form */
 app.use(express.static(path.join(__dirname, 'public'))); // Get static files (from public/)
@@ -77,23 +80,18 @@ app.use(express.urlencoded({ extended: true })); // Receive data from form
 
 /* MIDDLEWARES */
 app.all('*', (req, res, next) => {
-	let securePaths   = ['/', '/makepost', '/postinteraction', '/logout____', '/user/*', '/configs', '/updateprofile'], // Can only acess if logged
-		loginPaths    = ['/login', '/signup', '/dologin', '/dosignup'], // Can only acess if not logged
-		authenticated = req.isAuthenticated();
+	// let securePaths   = ['/', '/makepost', '/postinteraction', '/logout____', '/user/*', '/configs', '/updateprofile'], // Can only acess if logged
+	let loginPaths    = ['/login', '/signup', '/dologin', '/dosignup']; // Can only acess if not logged
+	let authenticated = req.isAuthenticated();
 
-	console.log("MIDDLEWARE =>", req.path, authenticated)
-	// if(securePaths.includes(req.path) && !authenticated) {
-	// 	console.log("=> MANDANDO PARA PAGINA DE LOGIN")
-	// 	return res.redirect('/login');
-	// } else if(loginPaths.includes(req.path) && authenticated) {
+	// console.log("MIDDLEWARE =>", req.path, authenticated)
 	if(loginPaths.includes(req.path) && authenticated) {
-		console.log("=> MANDANDO PARA PAGINA INICIAL")
+		// console.log("=> MANDANDO PARA PAGINA INICIAL")
 		return res.redirect('/');
 	} else if(!loginPaths.includes(req.path) && !authenticated) { // If not loginPath, is a secure path
-		console.log("=> MANDANDO PARA PAGINA DE LOGIN")
+		// console.log("=> MANDANDO PARA PAGINA DE LOGIN")
 		return res.redirect('/login');
 	}
-	// else if(!authenticated) return res.redirect('/login');
 
 	next(); // Necessary otherwhise won't work
 });
