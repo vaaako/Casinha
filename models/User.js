@@ -9,8 +9,7 @@ const userSchema = new mongoose.Schema({
 	password:       { type: String, require: true },
 
 	bio:            { type: String, default: "Blablabla" },
-	role:           { type: String, default: 1 }, // Admin, User
-	// pfp:            { type: String, default: 'defaultpfp.png' }, // e.g. public/pfp/user_id.png (I know i can query in the folder, but this is faster)
+	role:           { type: Number, default: 1 }, // 0 = Admin, 1 = User
 	posts:          { type: Array, default: [] }, // ID of made posts
 	reactedPosts:   { type: Array, default: [] }, // { postid: id, reaction: "like" }
 	commentedPosts: { type: Array, default: [] }  // ID of commented posts (change later)
