@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', Arial;
+}
+
+ul {
+	list-style: none;
+}
+
+body {
+	background-color: #262626;
+	color: aliceblue;
+}
+
+
+
+
+/**
+ * 
+ * HEADER
+ * 
+ * */
+
+header {
+	background-color: #191919;
+	text-align: center;
+	padding: 4rem 0;
+}
+
+header h1 {
+	padding-bottom: 40px;
+}
+
+input {
+	background-color: rgba(38, 38, 38, 0.5);
+	color: aliceblue;
+	border: 2px solid darkslategray;
+	border-radius: 5px;
+	outline: none;
+}
+
+
+textarea {
+	background-color: transparent;
+	color: aliceblue;
+
+	border: 2px solid darkslategray;
+	border-radius: 5px;
+
+	outline: none;
+	resize: none;
+
+	padding: 5px;
+}
+
+
+.pfp-style {
+	--pfp-size: 50px;
+	width: var(--pfp-size);
+	height: var(--pfp-size);
+	max-width: 100%;
+	max-height: 100%;
+
+	border-radius: 100%;
+}
+
+
+
+/**
+ * 
+ * SYSTEM MESSAGE
+ * 
+ * */
+
+.message {
+	font-size: 13px;
+	text-align: center;
+}
+
+.sucess {
+	color: green;
+}
+
+.error {
+	color: red;
+}
+
+
+/**
+ * 
+ * MANAGE-BUTTONS
+ * 
+ * */
+
+
+.submit-button {
+	background-color: #111111;
+	color: aliceblue;
+
+	font-size: 14px;
+	font-weight: 700;
+
+	padding: 10px;
+
+	border: none;
+	border-radius: 5px;
+
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+}
+
+.submit-button:hover {
+	background-color: #202020;
+}
+
+
+
+
+.manage-buttons {
+	display: flex;
+	gap: .7rem;
+	margin: 10px 5px;
+}
+
+.header-buttons {
+	display: flex;
+	gap: 1rem;
+	position: fixed;
+	top: 0;
+
+	margin: 10px;
+	
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btn {
+	color: white;
+	text-decoration: none;
+
+	padding: 7px 12px;
+	border-radius: 5px;
+	transition: all .3s ease-in-out;
+}
+
+.btn-main {
+	background-color: #3E3BF7;
+	padding: 7px 12px;
+	border-radius: 5px;
+}
+
+.btn-main:hover {
+	background-color: royalblue;
+}
+
+
+.btn-close {
+	background-color: #E60000;
+	padding: 7px 12px;
+	border-radius: 5px;
+}
+
+.btn-close:hover {
+	background-color: red;
+}
+
+
+
+
+
+
+
+
+
+/**
+ * 
+ * MODAL
+ * 
+ * */
+
+section#modal {
+	background: rgba(0, 0, 0, 0.8);
+
+	display: flex;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	justify-content: center;
+	align-items: center;
+	pointer-events: auto;
+
+	z-index: 999;
+}
+
+div#card {
+	background-color: rgba(38, 38, 38, 0.9);
+	border-radius: 20px;
+	width: 20%;
+	padding: 40px;
+
+	position: relative;
+}
+
+div#card h2 {
+	padding: 20px;
+	margin: 0;
+}
+
+div#card a#close {
+	color: white;
+	text-decoration: none;
+	font-size: 1.5em;
+
+	padding: 10px 27px;
+	position: absolute;
+	right: 0;
+	top: 10px;
+
+}
+
+/*div#card a#close:hover {
+	background-color: #E60000;
+	border-radius: 50%;
+}*/

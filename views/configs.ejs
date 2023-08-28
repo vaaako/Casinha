@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="/styles/base.css">
+	<link rel="stylesheet" href="/styles/sidebar.css">
+	<link rel="stylesheet" href="/styles/configs.css">
+
+	<script type="text/javascript" src="/scripts/home.js" defer></script>
+
+	<!-- Bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+	<title>Casinha | Configs</title>
+
+	<style type="text/css">
+		.banner {
+			background-image: url('/medias/banners/<%= user.id %>.png');
+			background-size: cover;
+			background-position: center;
+
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<%- include('partials/sidebar', { user }); %>
+
+	<header class="banner">
+		<div class="bg">
+			<h1>CONFIGS</h1>
+		</div>
+	</header>
+
+	<section>
+		<%- include('partials/message', { message }); %>
+
+		<form action="/updateprofile" enctype="multipart/form-data" id="configform" method="post">
+			<div class="pfp-container">
+				<label>Profile Picture</label>
+				<!-- <img class="pfp-style" src="/medias/pfp/<%= user.id %>.png" onerror="this.onerror=null; this.src='/medias/pfp/defaultpfp.png';" alt="pfp"> -->
+				<input type="file" name="newpfp" accept="image/*">
+			</div> 
+
+			<div class="banner-container">
+				<label>Banner</label>
+				<input type="file" name="newbanner" accept="image/*">
+			</div> 
+
+			<div>
+				<label>Nickname</label>
+				<input type="text" name="newnickname" placeholder="<%= user.nickname %>"
+					autocomplete="off" minlength="4" maxlength="25">
+			</div>
+
+			<div>
+				<label>Bio</label>
+				<textarea name="newbio" oninput="autogrow(this);" placeholder="<%= user.bio %>" maxlength="200"></textarea>
+			</div>
+
+			<button class="submit-button" type="submit">Update</button>
+		</form>
+	</section>
+</body>
+</html>

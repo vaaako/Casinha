@@ -1,0 +1,69 @@
+<%
+	let reaction = post.userReacted;
+	let postauthor = post.author;
+%>
+
+
+<div data-post-id="<%= post.pubid %>" class="post-block">
+	<div class="user-area">
+		<img class="pfp-style" src="/medias/pfp/<%= postauthor.id %>.png" onerror="this.onerror=null; this.src='/medias/pfp/defaultpfp.png';" alt="pfp">
+
+		<a class="name-container" href="/<%= postauthor.username %>">
+			<p class="nickname"><%= postauthor.nickname %></p>
+			<p class="username"><%= postauthor.username %></p>
+		</a>
+		<span class="dotdate">• <p class="date"><%= post.formatedDate %></p></span>
+	</div>
+
+	<div class="content">
+		<!-- <p> <%= post.pubid %> </p> -->
+		<p> <%= post.content %> </p>
+
+		<% if(post.media) {
+			if(post.media.type == 0) { %>
+				<img src="/medias/posts/<%= post.media.name %>" alt="post-image">
+			<% } else { %>
+				<video width="320" height="240" controls>
+					<source src="/medias/posts/<%= post.media.name %>" type="video/mp4">
+					<!-- <source src="movie.ogg" type="video/ogg"> -->
+					Your browser does not support the video tag
+				</video> 
+			<% } %>
+		<% } %>
+	</div>
+
+
+	<hr>
+	<div class="interaction-buttons">
+		<div class="like-dislike">
+			<div class="like-button" data-interaction-name="like" onclick="likePost(this);">
+				<% if(reaction == 'like') { %>
+					<span class="bi bi-star-fill"></span>
+				<% } else { %>
+					<span class="bi bi-star"></span>
+				<% } %>
+
+				<span class="interaction-text"><%= post.likes %></span>
+			</div>
+		
+			<div class="dislike-button" data-interaction-name="dislike" onclick="dislikePost(this);">
+				<% if(reaction == 'dislike') { %>
+					<span class="bi bi-pentagon-fill"></span>
+				<% } else { %>
+					<span class="bi bi-pentagon"></span>
+				<% } %>
+
+				<span class="interaction-text"><%= post.dislikes %></span>
+			</div>	
+		</div>
+
+		<div class="comment-button" data-interaction-name="comment">
+			<a href="/post/<%= post.pubid %>">
+				<span class="bi bi-triangle"></span>
+				<span class="interaction-text"><%= post.comments.length %></span>
+			</a>
+		</div>
+
+	</div>
+</div>
+

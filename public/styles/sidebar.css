@@ -1,0 +1,100 @@
+@font-face {
+	font-family: 'Special Alphabets';
+	src: local('Special Alphabets 4'), local('Special-Alphabets-4'),
+		url('/fonts/SpecialAlphabets-4.woff2') format('woff2'),
+		url('/fonts/SpecialAlphabets-4.woff') format('woff'),
+		url('/fonts/SpecialAlphabets-4.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.openbtn {
+	position: fixed;
+
+	top: 0;
+	left: 0;
+
+	cursor: pointer;
+	margin: 10px;
+
+}
+
+.sidenav {
+	background-color: #111;
+	position: fixed;
+
+	width: 0;
+/*	width: 200px;*/
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	overflow-x: hidden; /* Disable horizontal scroll */
+	z-index: 1;
+	transition: 0.5s;
+}
+
+.sidenav a {
+	display: block;
+
+	color: #818181;
+	text-align: center;
+	font-size: 25px;
+
+	text-decoration: none;
+	padding-bottom: 8px;
+	transition: all .3s ease-in-out;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.homebtn {
+	font-family: 'Special Alphabets';
+}
+
+.mainbtns {
+	position: none;
+
+	text-align: center;
+
+	display: flex;
+	top: 0;
+
+	padding-inline: 8px;
+	margin-inline: 10px;
+
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mainbtns .homebtn {
+	font-family: 'Special Alphabets';
+	font-size: 40px;
+}
+
+
+.mainbtns .closebtn {
+	font-size: 36px;
+}
+
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 767px) {
+/*	.openbtn {
+		--img-size: 55px;
+		width: var(--img-size);
+		height: var(--img-size);
+	}*/
+}

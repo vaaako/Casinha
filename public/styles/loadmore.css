@@ -1,0 +1,36 @@
+.loadmore-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-bottom: 30px;
+}
+
+.loadmore-container span {
+	font-size: 20px;
+	font-weight: 100;
+}
+
+.loadmore-container button {
+	background: none;
+	color: aliceblue;
+	font-size: 25px;
+
+	border: none;
+
+	padding: 10px;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+}
+
+.loadmore-container button:hover {
+	color: lightgray;
+	transform: rotate(350deg);
+/*	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+*/
+}
+
+.loadmore-container button:active {
+	transform: rotate(-300deg);
+}

@@ -1,0 +1,195 @@
+/**
+ * 
+ * USER POST
+ * 
+ * */
+
+.user-area {
+	display: flex;
+	gap: 1rem;
+
+	text-align: center;
+	align-content: start;
+	justify-content: start;
+
+	padding-bottom: 10px;
+
+	--username-size: 13px;
+}
+
+.name-container {
+	display: block;
+	gap: .3rem;
+
+	justify-content: center;
+	align-items: center;
+}
+
+
+.username {
+	font-size: var(--username-size);
+	color: gray;
+}
+
+.dotdate {
+	display: flex;
+	gap: 1rem;
+
+	justify-content: center;
+	align-items: center;
+
+	margin-bottom: var(--username-size);
+}
+
+.date {
+	font-size: 13px;
+	color: darkgray;
+}
+
+
+.content p {
+	margin-bottom: 20px;
+}
+.content img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+
+
+/**
+ * 
+ * CONTENT
+ * 
+ * */
+
+section#posts {
+	display: block;
+
+	max-width: 100%;
+	width: 50%;
+	margin-inline: auto;
+}
+
+.post-block {
+	background-color: #212121;
+
+	margin-bottom: 30px;
+	padding: 20px;
+
+	border: 2px solid darkslategray;
+	border-radius: 10px;
+
+	transition: all .3s ease-in-out;
+}
+
+.content {
+/*	text-align: center;*/
+	margin-left: 5px;
+}
+
+/*.content img {
+	cursor: pointer;
+}
+*/
+
+.post-block hr {
+	margin-top: 20px;
+}
+
+/* Margin from page top and page bottom */
+.post-block:first-child {
+	margin-top: 30px;
+}
+
+.post-block:last-child {
+	margin-bottom: 30px;
+}
+
+
+
+.post-block:hover {
+	background-color: #222222;
+}
+
+.post-block a {
+	text-decoration: none;
+	color: aliceblue;
+/*	margin-inline: 5px;*/
+}
+
+
+
+/**
+ * 
+ * INTERACTION-BUTTONS
+ * 
+ * */
+
+.interaction-buttons {
+	display: flex;
+/*	gap: 1rem;*/
+	
+	margin-top: 10px ;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.interaction-buttons div {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+
+	
+/*	padding-inline: 10px;*/
+	border-radius: 5px;
+	transition: all .3s ease-in-out;
+
+
+}
+
+.like-dislike {
+	display: flex;
+	align-items: center;
+
+	gap: 1rem;
+}
+
+.interaction-buttons div:hover {
+	color: gray;
+}
+
+.interaction-text {
+	margin-left: 7px;
+}
+
+
+
+
+#comment-title h1 {
+	margin-top: 10px;
+}
+
+#comment-title {
+	margin-bottom: 20px;
+}
+
+
+
+
+@media (max-width: 767px) {
+/*	.pfp {
+		width: 30px;
+	}*/
+	section#posts {
+		width: 80%;
+	}
+
+	.interaction-buttons div {
+		display: flex;
+		text-align: center;
+	}
+}
+
+

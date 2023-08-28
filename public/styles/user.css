@@ -1,0 +1,46 @@
+#profile-area {
+/*	display: grid;*/
+	gap: 1rem;
+
+	text-align: center;
+
+	background: rgba(25, 25, 25, 0.5);
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#profile-area img {
+	--pfp-size: 200px;
+}
+
+#nickname {
+	font-size: 25px;
+}
+
+#username {
+	color: darkgray;
+	font-size: 12px;
+}
+
+#bio {
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	max-width: 50%;
+	margin-inline: auto;
+}
+
+
+#not-found i {
+	font-size: 50px;
+}
+
+
+@media (max-width: 767px) {
+	#bio {
+		max-width: 80%;
+	}
+
+}
+
+

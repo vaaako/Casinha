@@ -1,0 +1,48 @@
+#postform {
+	display: inline-grid; /* Change this later */
+	
+	justify-content: center;
+	align-items: center;
+
+	font-size: 15em;
+
+	max-width: 90%;
+	width: 100%;
+	gap: .5rem;
+
+
+/*	display: block;
+
+	max-width: 100%;
+	width: 50%;
+	margin-inline: auto;
+*/
+}
+
+#postform input[type="file"] {
+	
+}
+
+#postarea {
+	overflow: hidden;
+	min-height: 80px;
+	max-height: 250px;
+}
+
+.submit-button {
+	background-color: #262626;
+}
+
+.submit-button:hover {
+	background-color: #333333;
+}
+
+
+
+@media (max-width: 767px) {
+	#postform {
+		width: 80%;
+	}
+}
+
+

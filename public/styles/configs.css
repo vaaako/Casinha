@@ -1,0 +1,65 @@
+.bg {
+	background: rgba(25, 25, 25, 0.5);
+	padding: 4rem;
+}
+
+#configform {
+	margin-inline: auto;
+
+	width: 100%;
+	max-width: 50%;
+	padding: 15px;
+}
+
+#configform div {
+	display: grid;
+	margin-inline: auto;
+	margin-bottom: 10px;
+}
+
+#configform input {
+	padding: 5px;
+}
+
+/*#configform input[type='file'] {
+	margin-top: 10px;
+}*/
+
+#configform textarea {
+	max-height: 100px;
+}
+
+.message {
+	text-align: center;
+	margin-top: 20px;
+}
+
+
+/*
+	appearance: initial;
+	opacity: 0;
+	
+	width: 100%;
+	height: 100%;
+	position: absolute;
+*/
+
+.submit-button {
+	background-color: #111111;
+	display: block;
+	width: 100%;
+}
+
+.submit-button:hover {
+	background-color: #202020;
+}
+
+
+@media (max-width: 767px) {
+	#configform {
+		max-width: 80%;
+	}
+}
+
+
+

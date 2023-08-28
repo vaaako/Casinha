@@ -1,0 +1,29 @@
+<span class="loadmore-container">
+	<button id="loadmore-btn" onclick="loadmore();"><i class="bi bi-arrow-clockwise"></i></button>
+<span>
+
+<script type="text/javascript">
+	let startFrom = 2, limit = 2;
+	const postsContainer = document.getElementById("posts");
+
+	let button    = document.getElementById('loadmore-btn');
+	let noContent = document.createElement('span');
+	noContent.innerHTML = 'No more posts!';
+
+	function loadmore() {
+		$.ajax({
+			url: "/loadmore",
+			method: "POST",
+			data: { startfrom: startFrom, limit, username: "<%= username %>", parentpostid: "<%= parentpostid %>" },
+			success: (res) => {
+				if(!res.html) return button.parentElement.replaceChild(noContent, button);
+
+				postsContainer.insertAdjacentHTML("beforeend", res.html);
+				startFrom += limit;
+			},
+			error: (error) => {
+				console.error("Error: " + error.message);
+			}
+		});
+	}
+</script>

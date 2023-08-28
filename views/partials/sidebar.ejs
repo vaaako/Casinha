@@ -1,0 +1,20 @@
+<script type="text/javascript">
+	const openNav  = () => document.getElementById("sidenav").style.width = "200px";
+	const closeNav = () => document.getElementById("sidenav").style.width = "0";
+</script>
+
+<div id="sidenav" class="sidenav">
+	<div class="mainbtns">
+		<!-- <a href="/" class="homebtn">LOGO</a> -->
+		<a href="/" class="homebtn">C</a>
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav();">&times;</a>
+	</div>
+
+	<div class="pages">	
+		<a href="/<%= user.username %>">Profile</a>
+		<a href="/configs">Configs</a>
+		<a href="/logout">Logout</a>
+	</div>
+</div>
+
+<img class="openbtn pfp-style" src="/medias/pfp/<%= user.id %>.png" onerror="this.onerror=null; this.src='/medias/pfp/defaultpfp.png';" alt="open-menu" onclick="openNav();">

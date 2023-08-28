@@ -1,0 +1,93 @@
+section#login {
+	display: flex; /* To center */
+	justify-content: center;
+	align-items: center;
+
+	padding: 20px 0;
+}
+
+
+.show-password {
+	position: absolute;
+	cursor: pointer;
+	color: lightgray;
+/*	transform: translateY(20%);
+	right: 10%;
+
+	padding: 0;
+	margin: 0;
+*/
+
+	top: 50%;
+	right: 10px;
+}
+
+.pword-container {
+	position: relative;
+}
+
+.login-box {
+	border: 2px solid darkslategray;
+	border-radius: 5px;
+
+	max-width: 300px;
+	width: 100%;
+
+	padding: 20px;
+
+	position: absolute; /* Just in log in page, to stay at the center of screen */
+	top: calc(20% - 20px);
+}
+
+@media (max-width: 767px) {
+	.login-box {
+		position: relative;
+		top: 0;
+
+		max-width: 100%;
+		width: 80%;
+	}
+}
+
+.login-box form {
+	display: grid;
+	gap: 1.5rem;
+
+	align-items: center;
+	justify-content: center;
+}
+
+.login-box h1 {
+	text-align: center;
+	padding-block: 20px;
+}
+
+.login-box input {
+	padding: 5px;
+	width: 95%;
+}
+
+
+.submit-button {
+	display: block;
+	background-color: #111111;
+}
+
+.submit-button:hover {
+	background-color: #202020;
+}
+
+
+
+
+
+.footer-text {
+	text-align: center;
+	font-size: 15px;
+	margin-top: 40px;
+}
+
+.footer-text a {
+	text-decoration: none;
+	color: lightblue;
+}
