@@ -1,6 +1,19 @@
 <%
 	let reaction = post.userReacted;
 	let postauthor = post.author;
+
+	// Find >greentext and format
+	// It needs to be the first one because it can match "<span>text</span>" as greentext
+	let content = post.content.replace(/>(.*)/g , (match) => '<span style="color: green;">' + match + '</span>');
+
+	// Find @user and format
+	content = content.replace(/@\w+/g, (match) => `<strong><a style="color: blue;" href="/${match.split('@')[1]}">` + match + '</a></strong>');
+
+	// Find #hashtag and format
+	content = content.replace(/#\w+/g , (match) => '<strong style="font-weight: 900;">' + match + '</strong>');
+
+	// Add line break
+	content = content.replace(/\n/g, '<br>')
 %>
 
 
@@ -17,7 +30,7 @@
 
 	<div class="content">
 		<!-- <p> <%= post.pubid %> </p> -->
-		<p> <%= post.content %> </p>
+		<p> <%- content %> </p>
 
 		<% if(post.media) {
 			if(post.media.type == 0) { %>
@@ -34,33 +47,33 @@
 
 
 	<hr>
-	<div class="interaction-buttons">
+	<div class="reaction-buttons">
 		<div class="like-dislike">
-			<div class="like-button" data-interaction-name="like" onclick="likePost(this);">
+			<div class="like-button" data-reaction-name="like" onclick="likePost(this);">
 				<% if(reaction == 'like') { %>
 					<span class="bi bi-star-fill"></span>
 				<% } else { %>
 					<span class="bi bi-star"></span>
 				<% } %>
 
-				<span class="interaction-text"><%= post.likes %></span>
+				<span class="reaction-text"><%= post.likes %></span>
 			</div>
 		
-			<div class="dislike-button" data-interaction-name="dislike" onclick="dislikePost(this);">
+			<div class="dislike-button" data-reaction-name="dislike" onclick="dislikePost(this);">
 				<% if(reaction == 'dislike') { %>
 					<span class="bi bi-pentagon-fill"></span>
 				<% } else { %>
 					<span class="bi bi-pentagon"></span>
 				<% } %>
 
-				<span class="interaction-text"><%= post.dislikes %></span>
+				<span class="reaction-text"><%= post.dislikes %></span>
 			</div>	
 		</div>
 
-		<div class="comment-button" data-interaction-name="comment">
+		<div class="comment-button" data-reaction-name="comment">
 			<a href="/post/<%= post.pubid %>">
 				<span class="bi bi-triangle"></span>
-				<span class="interaction-text"><%= post.comments.length %></span>
+				<span class="reaction-text"><%= post.comments.length %></span>
 			</a>
 		</div>
 

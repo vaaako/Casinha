@@ -46,6 +46,12 @@
 	color: darkgray;
 }
 
+.content {
+	text-align: left;
+	margin-left: 5px;
+	overflow-wrap: break-word;
+}
+
 
 .content p {
 	margin-bottom: 20px;
@@ -83,11 +89,6 @@ section#posts {
 	transition: all .3s ease-in-out;
 }
 
-.content {
-/*	text-align: center;*/
-	margin-left: 5px;
-}
-
 /*.content img {
 	cursor: pointer;
 }
@@ -122,11 +123,11 @@ section#posts {
 
 /**
  * 
- * INTERACTION-BUTTONS
+ * reaction-BUTTONS
  * 
  * */
 
-.interaction-buttons {
+.reaction-buttons {
 	display: flex;
 /*	gap: 1rem;*/
 	
@@ -136,7 +137,7 @@ section#posts {
 }
 
 
-.interaction-buttons div {
+.reaction-buttons div {
 	color: white;
 	text-decoration: none;
 	cursor: pointer;
@@ -156,11 +157,11 @@ section#posts {
 	gap: 1rem;
 }
 
-.interaction-buttons div:hover {
+.reaction-buttons div:hover {
 	color: gray;
 }
 
-.interaction-text {
+.reaction-text {
 	margin-left: 7px;
 }
 
@@ -186,7 +187,7 @@ section#posts {
 		width: 80%;
 	}
 
-	.interaction-buttons div {
+	.reaction-buttons div {
 		display: flex;
 		text-align: center;
 	}
