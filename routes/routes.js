@@ -6,6 +6,7 @@ const UserController = require('../controller/UserController');
 const ConfigController = require('../controller/ConfigController');
 const OtherController = require('../controller/OtherController');
 const PostController = require('../controller/PostController');
+const MailController = require('../controller/MailController');
 
 /* Homepage */
 routes.get('/', HomeController.homePage);
@@ -35,6 +36,8 @@ routes.post('/updateprofile', ConfigController.updateProfile);
 
 routes.post('/loadmore', OtherController.loadMore);
 
+/* Notifications Page */
+routes.get('/mails', MailController.mailPage);
 
 /* User page */
 //-> It needs to stay in the end, otherwhise the other routes would be indentified as that
