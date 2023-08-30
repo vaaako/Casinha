@@ -6,21 +6,21 @@ This is developed using Node.js with
 Link: https://casinha.vaaako.repl.co
 
 ## Features
-- **Secure Authentication**
-- **Home Page with Posts**
-- **Post Creation**
-- **Comments**
-- **Social Interactions**
-- **User Profiles**
-- **Custom Settings**
-- **Notifications**
-- **Format Text**
+- Secure Authentication
+- Home Page with Posts
+- Post Creation
+- Comments
+- Social Interactions
+- User Profiles
+- Custom Settings
+- Notifications
+- Format Text
 
 ## Technologies Used
-- **Node.js**
-- **Express**
-- **Passport and express-local:**
-- **MongoDB**
+- Node.js
+- Express
+- Passport and express-local
+- MongoDB
 
 ## Installation and Configuration
 Follow the steps below to install and configure the project on your machine:
