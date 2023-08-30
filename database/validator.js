@@ -10,6 +10,7 @@ const isNicknameValid = (nickname) => nickname.length >= MIN_NAME_LENGTH && nick
 const isUsernameValid = (username) => /^[A-Za-z0-9_]+$/g.test(username) && username.length >= MIN_NAME_LENGTH && username.length <= MAX_NAME_LENGTH;
 const isEmailValid    = (email) => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
 const isPasswordValid = (password, confirmpword) => password == confirmpword && password.length >= 8;
+const isOnlyPasswordValid = (password) => password.length >= 8;
 const isBioValid = (bio) => bio.length >= MIN_BIO_LENGTH && bio.length <= MAX_BIO_LENGTH;
 
 
@@ -31,6 +32,14 @@ const errorMessages = {
 
 	"username-inuse": USERNAME_INUSE_ERROR_MESSAGE,
 	"email-inuse": EMAIL_INUSE_ERROR_MESSAGE
+}
+
+const validUsernameAndPword = (username, password) => {
+	if(!isUsernameValid(username)) // Test username 
+		return USERNAME_ERROR_MESSAGE;
+	else if(!isOnlyPasswordValid(password)) // Test Email
+		return PASSWORD_ERROR_MESSAGE;
+	return null // No errors
 }
 
 const validAll = (username, email, password, confirmpword) => {
@@ -101,6 +110,7 @@ module.exports = {
 	isBioValid,
 	usernameIsInUse,
 	emailIsInUse,
+	validUsernameAndPword,
 	validAll,
 
 	// Post
