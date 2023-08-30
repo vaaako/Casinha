@@ -99,13 +99,51 @@ async function formatPost(posts, userid) {
 	});
 
 
-	const modifiedPosts = await Promise.all(modifiedPostsPromise)
+	const modifiedPosts = await Promise.all(modifiedPostsPromise);
 	return modifiedPosts;
+}
+
+const getTypeMessage = (type, origin) => {
+	const typeMessagesMap = {
+		0: "commented on your",
+		1: origin + 'd your',
+		2: 'mentioned you on a'
+	};
+	return typeMessagesMap[type];
+}
+
+const formatMail = async (mails) => {
+	const authors = new Map();
+	let mailAuthorIDs = mails.map((mail) => mail.from);
+	const allAuthors = await User.find({ pubid: { $in: mailAuthorIDs } }); // Get all authors
+	allAuthors.map((author) => authors.set(author.pubid, author));
+
+	let index = 0;
+	const modifiedMails = mails.map((mail) => {
+		let author = authors.get(mail.from);
+		let typemessage = getTypeMessage(mail.details.type, mail.details.origin);
+
+		return {
+			postid: mail.postid,
+			read: mail.read,
+			index: index++, // Used to read a mail
+			whoreacted: {
+				id: author.pubid,
+				username: author.username,
+				nickname: author.nickname
+			},
+			formatedDate: timeAgo(mail.date),
+			message: formatContent(`@${author.username} ${typemessage} post`)
+		}
+	});
+
+	return modifiedMails;
 }
 
 
 module.exports = {
 	formatPost,
 	timeAgo,
-	formatContent
+	formatContent,
+	formatMail
 }

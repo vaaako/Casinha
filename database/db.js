@@ -76,8 +76,8 @@ function makeMailObject(postid, authorid, type, origin) {
 		read: false,    // Was mail readed?
 		date: Date.now(), // Date
 		details: {
-			type: type, // 0 -> Commentary / 1 -> Like/Dislike
-			origin: origin // If Commentary -> Commentary's ID Else if is like or dislike
+			type: type, // 0 -> Commentary / 1 -> Like/Dislike / 2 -> Mention
+			origin: origin // If Commentary/Mention -> Commentary/Post's ID Else if is like or dislike
 		}
 	}
 }
