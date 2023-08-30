@@ -1,0 +1,24 @@
+<%
+	let mailauthor = mail.whoreacted;
+	let readcolor = (mail.read) ? '#212121' : 'darkslategray';
+%>
+
+<div style="border-color: <%= readcolor %>;"
+	 onclick="window.location.href = '/post/<%= mail.postid %>'; readThis(<%= mail.read %>, <%= mail.index %>);"
+	 class="mail-block">
+
+	<div class="user-area">
+		<img class="pfp-style" src="/medias/pfp/<%= mailauthor.id %>.png" onerror="this.onerror=null; this.src='/medias/defaultpfp.png';" alt="pfp">
+
+		<a class="name-container" href="/<%= mailauthor.username %>">
+			<p class="nickname"><%= mailauthor.nickname %></p>
+			<p class="username"><%= mailauthor.username %></p>
+		</a>
+		<span class="dotdate">• <p class="date"><%= mail.formatedDate %></p></span>
+	</div>
+
+	<div class="content">
+		<p><%- mail.message %></p>
+	</div>
+</div>
+

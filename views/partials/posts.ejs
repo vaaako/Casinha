@@ -1,22 +1,10 @@
 <%
 	let reaction = post.userReacted;
 	let postauthor = post.author;
-
-	// Find >greentext and format
-	// It needs to be the first one because it can match "<span>text</span>" as greentext
-	let content = post.content.replace(/>(.*)/g , (match) => '<span style="color: green;">' + match + '</span>');
-
-	// Find @user and format
-	content = content.replace(/@\w+/g, (match) => `<strong><a style="color: blue;" href="/${match.split('@')[1]}">` + match + '</a></strong>');
-
-	// Find #hashtag and format
-	content = content.replace(/#\w+/g , (match) => '<strong style="font-weight: 900;">' + match + '</strong>');
-
-	// Add line break
-	content = content.replace(/\n/g, '<br>')
 %>
 
 
+<!-- <div data-post-id="<%= post.pubid %>" id="<%= post.pubid %>" class="post-block"> -->
 <div data-post-id="<%= post.pubid %>" class="post-block">
 	<div class="user-area">
 		<img class="pfp-style" src="/medias/pfp/<%= postauthor.id %>.png" onerror="this.onerror=null; this.src='/medias/defaultpfp.png';" alt="pfp">
@@ -30,7 +18,7 @@
 
 	<div class="content">
 		<!-- <p> <%= post.pubid %> </p> -->
-		<p> <%- content %> </p>
+		<p> <%- post.content %> </p>
 
 		<% if(post.media) {
 			if(post.media.type == 0) { %>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<%- include('partials/embed'); %>
+
+	<link rel="stylesheet" href="/styles/base.css">
+	<link rel="stylesheet" href="/styles/sidebar.css">
+	<link rel="stylesheet" href="/styles/posts.css">
+	<link rel="stylesheet" href="/styles/mails.css">
+
+	<script type="text/javascript" src="/scripts/mail.js" defer></script>
+
+	<!-- Bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+	<title>Casinha | Mails</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+	<%- include('partials/sidebar', { user: user }); %>
+	<header>
+		<h1>
+			<a href="/"><%= user.nickname %>'s Mails
+				<i class="bi bi-envelope"></i>
+			</a>
+		</h1>
+		<button class="submit-button" onclick="readAll();">Read All</button>
+		<button class="submit-button" onclick="deleteAll();">Delete All</button>
+	</header>
+
+	<section id="mails">
+		<% for(const mail of mails) { %>
+			<%- include('partials/mails', { mail }); %>
+		<% } %>
+	</section>
+
+	<!-- <%// include('partials/loadmore-mails', { username: user.username, parentpostid: undefined }); %> -->
+</body>
+</html>
