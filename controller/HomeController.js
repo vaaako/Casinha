@@ -20,6 +20,12 @@ const { isPostValid, validateMedia } = require('../database/validator');
  * X Add "load more messages"
  * */
 
+/*
+require('dotenv').config();
+mongoose.connect(process.env.DB_URI, { dbName: process.env.DB_NAME, useNewUrlParser: true, useUnifiedTopology: true, });
+await User.updateMany({}, { $set: { mails: [] } });
+*/
+
 
 // eugostodecoisas eugostodechuparrola
 const homePage = async (req, res) => {
@@ -50,6 +56,18 @@ const homePage = async (req, res) => {
 	});
 };
 
+const findMatches = (text) => {
+	const matches = text.match(/@\w+/g);
+	if(matches) {
+		// IF f have same user, remove
+		const uniqueUsersSet = new Set(matches.map(match => match.substring(1)));
+		return Array.from(uniqueUsersSet);
+	} else {
+		return [];
+	}
+	// return (matches) ? matches.map(match => match.substring(1))
+	// 	: [];
+}
 
 const makePost = async (req, res) => {
 	try {
@@ -71,7 +89,33 @@ const makePost = async (req, res) => {
 
 		// Push pubid to user.posts
 		let user = await User.findOne({ pubid: author.id });
-		user.posts.push(entry.pubid)
+		user.posts.push(entry.pubid);
+
+		let matches = findMatches(entry.content);
+		if(matches) { // If has mentions
+			let users = await User.find({ username: { $in: matches } }); // Get all mentions
+
+			for(const user of users) {
+				// For each mentioned user that isn't the own user, mail it
+				if(user && user.username != author.username) {
+					user.mails.push(makeMailObject(entry.pubid, author.id, 2, entry.pubid))
+					await user.save();
+				}
+			}
+
+		}
+
+		// if(postauthorid && userid != postauthorid) {
+		// 	let user = await User.findOne({ pubid: userid }).select('mails');
+		// 	user.mails.push({
+		// 		postid: postid,
+		// 		from: postauthorid,
+		// 		read: false,
+		// 		date: Date.now(),
+		// 		details: { type: 1, origin: postid }
+		// 	});
+		// 	await user.save();
+		// }
 
 		// It needs to move here because of pubid
 		if(media) {
