@@ -58,9 +58,8 @@ You can access it in your browser via the address http://localhost:port_you_chos
 ## Future Features
 ### Priority order
 - [ ] MP3 Support
-- [ ] Notification
+- [X] Notification
 - [ ] DM
-- [ ] Crop Image
 
 ## Bugs to fix
 - [X] Time ago bug
