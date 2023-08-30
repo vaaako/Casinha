@@ -84,7 +84,7 @@ app.all('*', (req, res, next) => {
 	let loginPaths    = ['/login', '/signup', '/dologin', '/dosignup']; // Can only acess if not logged
 	let authenticated = req.isAuthenticated();
 
-	// console.log("MIDDLEWARE =>", req.path, authenticated)
+	console.log("MIDDLEWARE =>", req.path, authenticated)
 	if(loginPaths.includes(req.path) && authenticated) {
 		// console.log("=> MANDANDO PARA PAGINA INICIAL")
 		return res.redirect('/');
