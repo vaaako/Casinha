@@ -1,4 +1,5 @@
-const { checkAndCreate, formattedPost, gettAllComments } = require('../database/db');
+const { checkAndCreate, getAllComments, makeMailObject } = require('../database/db');
+const { formatPost } = require('../database/dataManipulation');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const { isPostValid, validateMedia } = require('../database/validator');
@@ -6,12 +7,11 @@ const { storeMessage, getMessage } = require('./MessageTool');
 
 const postPage = async (req, res) => {
 	let user = req.user;
-	let post = await Post.findOne({ pubid: req.params.postid });
+	let post = await Post.findOne({ pubid: req.params.postid }).lean();
 	if(!post) return res.render('notfound', { user });
 
-	let formattedpost = await formattedPost([post], req.user.id);
-
-	let allComments = await gettAllComments(post, user.id, limit=5);
+	let formattedpost = await formatPost([post], req.user.id);
+	let allComments = await getAllComments(post, user.id, limit=5);
 
 	return res.render('post', {
 		user,
@@ -23,6 +23,8 @@ const postPage = async (req, res) => {
 
 const makeComment = async (req, res) => {
 	try {
+		if(!req.body || !req.body.post) throw new Error("Bad request");
+
 		const { post } = req.body;
 		let author = req.user; // Add post author's id to Post body
 		let postid = req.params.postid;
@@ -36,7 +38,7 @@ const makeComment = async (req, res) => {
 		if(typeof media == 'string') throw new Error(media);
 
 		// Check for same and and create
-		let entry = await checkAndCreate(Post, { author: author.id, content: post, media }, comment=postid) // Pass media extension as argument
+		let entry = await checkAndCreate(Post, { author: author.id, content: post, media }, comment=postid) // Pass original postid as comment argument
 
 
 		// Push pubid to user.posts
@@ -48,6 +50,14 @@ const makeComment = async (req, res) => {
 			await media.sampleFile.mv('public/medias/posts/' + entry.pubid + media.extension, (err) => {
 				if(err) throw new Error(err);
 			});
+		}
+
+		// Notify post author
+		let reactedpost = await Post.findOne({ pubid: postid }).lean();
+		if(author.id != reactedpost.author) { // Just notify if is reacting to a different user
+			let toMail = await User.findOne({ pubid: reactedpost.author }); // Query user to send mail
+			toMail.mails.push(makeMailObject(postid, author.id, 0, entry.pubid));
+			await toMail.save();
 		}
 
 		// No errors, now save

@@ -12,12 +12,15 @@ const configPage = async (req, res) => {
 
 const updateProfile = async (req, res) => {
 	try {
+		if(!req.body) throw new Error("Bad request!");
 		let { newnickname, newbio } = req.body;
 		let user = await User.findOne({ pubid: req.user.id });
 		let localuser = req.user;
 
+		// There is nothing, do nothing
 		if(!newnickname && !newbio && !req.files) return res.redirect('/configs');
 
+		// Images
 		let newpfp = validateMedia(req.files, 'newpfp');
 		if(typeof newpfp == 'string') throw new Error(newpfp);
 
@@ -38,7 +41,7 @@ const updateProfile = async (req, res) => {
 		}
 
 
-
+		// Text
 		if(newnickname) {
 			if(!isNicknameValid(newnickname)) throw new Error(errorMessages.nickname);
 

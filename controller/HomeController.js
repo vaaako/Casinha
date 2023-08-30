@@ -1,4 +1,4 @@
-const { checkAndCreate, getAllPosts } = require('../database/db');
+const { checkAndCreate, getAllPosts, makeMailObject } = require('../database/db');
 const { storeMessage, getMessage } = require('./MessageTool');
 const Post = require('../models/Post');
 const User = require('../models/User');
@@ -28,12 +28,24 @@ const homePage = async (req, res) => {
 	// console.log("USER =>", req.user);
 	let user = req.user;
 
+	// TODO: Put mails on req.user
+	let mails = await User.findOne({ pubid: user.id }).select('mails').lean();
+
+	let haveMail = false;
+	for(const mail of mails.mails) {
+		if(!mail.read) {
+			haveMail = true;
+			break;
+		}
+	}
+
 	// Add likes and dislikes
 	const allPosts = await getAllPosts(user.id, limit=5);
 
 	return res.render('index', {
 		allPosts,
 		user,
+		haveMail,
 		message: getMessage()
 	});
 };
@@ -41,8 +53,10 @@ const homePage = async (req, res) => {
 
 const makePost = async (req, res) => {
 	try {
-		const { post } = req.body;
+		if(!req.body || !req.body.post) throw new Error("Bad request!");
+
 		let author = req.user; // Add post author's id to Post body
+		const { post } = req.body;
 
 		// Is valid
 		let isValid = isPostValid(req, author);
@@ -70,6 +84,9 @@ const makePost = async (req, res) => {
 		await entry.save();
 		await user.save();
 
+
+		// TODO: When make follow, make here notify the followers
+
 		return res.redirect('/');
 	} catch (err) {
 		console.log("[ERR] MAKE POST => ", err);
@@ -92,8 +109,8 @@ const findIndex = (obj, field, search) => {
 	return -1;
 }
 
-/* Post Interaction */
-const postInteractionQueue = async.queue(async ({ postid, userid, protocol, sum }) => {
+/* Post Reaction */
+const postReactionQueue = async.queue(async ({ postid, userid, reaction, sum }) => {
 	try {
 		const user = await User.findOne({ pubid: userid });
 		const post = await Post.findOne({ pubid: postid });
@@ -104,18 +121,26 @@ const postInteractionQueue = async.queue(async ({ postid, userid, protocol, sum 
 		 * e.g. if false && -1 -> how would someone remove something that is even added?
 		 * */
 		if(postIndex >= 0 && sum == -1) {
-			console.log("=> REMOVING", postIndex);
-
+			// console.log("=> REMOVING", postIndex);
+			
 			user.reactedPosts.splice(postIndex, 1);
 			let userIndex = findIndex(post.whoReacted, 'userid', userid);
 			// if(userIndex >=0 )
 			post.whoReacted.splice(userIndex, 1);
 		} else if(postIndex == -1 && sum == 1) {
-			console.log("=> PUSHING", postIndex);
+			// console.log("=> PUSHING", postIndex);
 
-			let reaction = protocol.slice(0, -1);
 			user.reactedPosts.push({ postid: postid, reaction: reaction });
 			post.whoReacted.push({ userid: userid, reaction: reaction });
+
+			// Just notify post author if is adding reaction
+
+			let author = await User.findOne({ pubid: post.author }); // It needs to add to author.mails
+			if(userid != post.author){ // Just notify is author is different of who reacted
+				author.mails.push(makeMailObject(postid, userid, 1, reaction));
+			}
+
+			await author.save();
 		} else {
 			throw new Error("Impossible request!");
 		}
@@ -128,24 +153,27 @@ const postInteractionQueue = async.queue(async ({ postid, userid, protocol, sum 
 }, 1); // Limit to one execution per time
 
 
-const postInteraction = async (req, res) => {
-	const { postid, protocol, sum, message } = req.body;
-	const userid = req.user.id;
-
-	// Check request
+const postReaction = async (req, res) => {
 	try {
-		if(!postid || !protocol || !sum || !message
-			||(!['likes', 'dislikes'].includes(protocol)
+		// Check request
+		if(!req.body) throw new Error("Bad request!");
+		const { postid, reaction, sum, message } = req.body;
+		const userid = req.user.id;
+
+		if(!postid || !reaction || !sum || !message
+			||(!['like', 'dislike'].includes(reaction)
 			|| (sum != 1 && sum != -1))) throw new Error("Bad request!");
 
-		postInteractionQueue.push({ postid, userid, protocol, sum }, (err) => {
+		postReactionQueue.push({ postid, userid, reaction, sum }, (err) => {
 			if(err) throw err.message;
 
 			// Success
 			return res.status(200).send({ sucess: true, message: message });
 		});
+
+		// Notify post author
 	} catch (err) {
-		console.log("[ERR] POST INTERACTION => ", err);
+		console.log("[ERR] POST Reaction => ", err);
 
 		storeMessage("Bad request!"); // Only happening if user send request manually
 		return res.redirect('/');
@@ -158,13 +186,13 @@ const postInteraction = async (req, res) => {
 module.exports = {
 	homePage,
 	makePost,
-	postInteraction
+	postReaction
 };
 
 
 
 // console.log(req.body);
 // await Post.findOneAndUpdate({ pubid: body.id }, {
-// 	$inc : { [body.protocol]: parseInt(body.sum) }
+// 	$inc : { [body.reaction]: parseInt(body.sum) }
 // }).then(async (post) => {
 

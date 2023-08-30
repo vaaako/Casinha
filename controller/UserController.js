@@ -5,7 +5,7 @@ const userPage = async (req, res) => {
 	if(!req.isAuthenticated()) return res.redirect('/');
 
 	let username = req.params.username;
-	let user = await User.findOne({ username: username })
+	let user = await User.findOne({ username: username }).lean();
 	let ownuser = req.user;
 
 	if(!user) return res.render('notfound', { user: ownuser }); // User not found

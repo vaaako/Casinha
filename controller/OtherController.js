@@ -1,6 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
-const { getAllPosts, getAllPostsFromUser, gettAllComments } = require('../database/db');
+const { getAllPosts, getAllPostsFromUser, getAllComments } = require('../database/db');
 
 const path = require('path');
 const ejs  = require('ejs');
@@ -26,13 +26,13 @@ const loadMore = async (req, res) => {
 		allPosts = await getAllPostsFromUser(thisuser, user.id, limit=limit, skip=startfrom);
 	} else if(parentpostid) { // If has postid, is a comment, load more comments
 		let post = await Post.findOne({ pubid: parentpostid });
-		allPosts = await gettAllComments(post, user.id, limit=limit, skip=startfrom);
+		allPosts = await getAllComments(post, user.id, limit=limit, skip=startfrom);
 	} else {
 		allPosts = await getAllPosts(user.id, limit=limit, skip=startfrom);
 	}
-
-
 	if(!allPosts) return res.status(200).send({ html: undefined }); // It needs to be 200 to not occur erro
+
+
 	
 	let html = "";
 	for(const post of allPosts) {
