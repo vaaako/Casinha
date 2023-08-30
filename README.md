@@ -13,6 +13,8 @@ Link: https://casinha.vaaako.repl.co
 - **Social Interactions**
 - **User Profiles**
 - **Custom Settings**
+- **Notifications**
+- **Format Text**
 
 ## Technologies Used
 - **Node.js**
@@ -35,6 +37,7 @@ npm install
  replacing with the appropriate values and rename it to `.env`:
 ```
 PORT=port # Port you want the application to run
+DB_NAME=your_db_name
 DB_URI=your-mongodb-connection-link
 SESSION_SECRET=your-secret-key-to-express-session
 ARGON2_SECRET=your-secret-key-to-hash-passwords
