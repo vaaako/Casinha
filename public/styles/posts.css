@@ -25,6 +25,9 @@
 	align-items: center;
 }
 
+.nickname {
+	color: aliceblue;
+}
 
 .username {
 	font-size: var(--username-size);
@@ -89,6 +92,10 @@ section#posts {
 	transition: all .3s ease-in-out;
 }
 
+.post-block video {
+	width: 100%;
+}
+
 /*.content img {
 	cursor: pointer;
 }
@@ -113,14 +120,6 @@ section#posts {
 	background-color: #222222;
 }
 
-.post-block a {
-	text-decoration: none;
-	color: aliceblue;
-/*	margin-inline: 5px;*/
-}
-
-
-
 /**
  * 
  * reaction-BUTTONS
@@ -135,7 +134,6 @@ section#posts {
 	justify-content: space-between;
 	align-items: center;
 }
-
 
 .reaction-buttons div {
 	color: white;
@@ -155,6 +153,15 @@ section#posts {
 	align-items: center;
 
 	gap: 1rem;
+}
+
+.comment-button a {
+	color: aliceblue;
+}
+
+
+.comment-button a:hover {
+	color: gray;
 }
 
 .reaction-buttons div:hover {

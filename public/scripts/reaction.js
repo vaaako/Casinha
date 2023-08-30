@@ -3,8 +3,6 @@ async function sendReaction(postId, reaction, sum) {
 		url: "/postreaction",
 		method: "POST",
 		data: { postid: postId, reaction: reaction, sum: sum, message: `Reaction ${sum} ${reaction} to post ${postId}` },
-		success: (res) => {
-		},
 		error: (error) => {
 			console.error("Error: " + error.message);
 		}
@@ -13,6 +11,7 @@ async function sendReaction(postId, reaction, sum) {
 
 
 const getPostId = (element) => element.parentElement.parentElement.parentElement.parentElement.getAttribute('data-post-id');
+// const getPostId = (element) => element.parentElement.parentElement.parentElement.parentElement.id;
 async function fillAndIncrease(iconElement, iconName) {
 	let postId = getPostId(iconElement);
 

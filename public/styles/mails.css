@@ -1,0 +1,27 @@
+section#mails {
+	display: flex;
+	gap: 1rem;
+
+	justify-content: center;
+	align-items: center;
+
+	flex-wrap: wrap;
+
+	max-width: 100%;
+	width: 100%;
+	margin-top: 30px;
+	margin-inline: auto;
+}
+
+.mail-block {
+	background-color: #212121;
+
+	margin-bottom: 30px;
+	padding: 20px;
+
+	border: 2px solid darkslategray;
+	border-radius: 10px;
+
+	transition: all .3s ease-in-out;
+	cursor: pointer;
+}
