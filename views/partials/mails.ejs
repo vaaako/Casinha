@@ -4,9 +4,11 @@
 %>
 
 <div style="border-color: <%= readcolor %>;"
-	 onclick="window.location.href = '/post/<%= mail.postid %>'; readThis(<%= mail.read %>, <%= mail.index %>);"
+	onclick=" window.location.href = '/post/<%= mail.postid %>'"
 	 class="mail-block">
 
+
+	 <!-- onclick="readThis(<%= mail.read %>, <%= mail.index %>); " -->
 	<div class="user-area">
 		<img class="pfp-style" src="/medias/pfp/<%= mailauthor.id %>.png" onerror="this.onerror=null; this.src='/medias/defaultpfp.png';" alt="pfp">
 
@@ -21,4 +23,6 @@
 		<p><%- mail.message %></p>
 	</div>
 </div>
+
+
 
