@@ -1,4 +1,5 @@
 # Casinha
+![frontpage](github/frontpage.png)
 
 This is developed using Node.js with
  the Express framework and MongoDB database
