@@ -15,7 +15,7 @@ Link: https://casinha.vaaako.repl.co
 - User Profiles
 - Custom Settings
 - Notifications
-- Format Text
+- Text Highlight
 
 ## Technologies Used
 - Node.js
